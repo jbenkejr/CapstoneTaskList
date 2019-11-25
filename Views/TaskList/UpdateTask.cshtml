@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "UpdateTask";
+}
+
+@model Tasks
+<h1>UpdateTasks</h1>
+
+<form action="../TaskList/UpdateTasks" method="post">
+    <input type="text" name="Task Name" value="@Model.TaskName" />
+    <input type="text" name="Description" value="@Model.Description" />
+    <input type="date" name="Due Date" value="@Model.DueDate" />
+    <input type="text" name="Complete" value="@Model.Complete" />
+    <input type="hidden" name="TasksId" value="@Model.Id" />
+    <input type="submit" class="btn-success" value="Update Tasks" />
+</form>
