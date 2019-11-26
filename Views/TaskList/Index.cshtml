@@ -23,9 +23,9 @@
             <td>@t.Description</td>
             <td>@t.DueDate</td>
             <td>@t.Complete</td>
-            <td><a href="../TaskList/UpdateTask?id=@t.Id">Update Task</a></td>
-            <td><a href="../TaskList/CompleteTask?id=@t.Id">Complete Task</a></td>
-            <td><a href="../TaskList/DeleteTask?id=@t.Id">Delete Task</a></td>
+            <td><a class="btn btn-primary" href="../TaskList/UpdateTask?id=@t.Id">Update Task</a></td>
+            <td><a class="btn btn-success" href="../TaskList/CompleteTask?id=@t.Id">Complete Task</a></td>
+            <td><a class="btn btn-danger"href="../TaskList/DeleteTask?id=@t.Id">Delete Task</a></td>
         </tr>
     }
 </table>

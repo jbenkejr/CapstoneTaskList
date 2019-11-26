@@ -32,18 +32,14 @@ namespace TaskListCapstone.Controllers
         [HttpGet]
         public IActionResult AddTask()
         {
-            string id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            if (_context.AspNetUsers.Where(x => x.Id == id) != null)
-            {
-                return View(_context.Tasks.Where(tasks => tasks.UserId == id).ToList());
-            }
-            _context.Tasks.ToList();
             return View();
         }
 
         [HttpPost]
         public IActionResult AddTask(Tasks task)
         {
+            task.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
             if (ModelState.IsValid)
             {
                 _context.Tasks.Add(task);
@@ -60,18 +56,14 @@ namespace TaskListCapstone.Controllers
         [HttpGet]
         public IActionResult UpdateTask(int id)
         {
-            string id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            if (_context.AspNetUsers.Where(x => x.Id == id) != null)
-            {
-                return View(_context.Tasks.Where(tasks => tasks.UserId == id).ToList());
-            }
-            _context.Tasks.ToList();
             return View(_context.Tasks.Find(id));
         }
 
         [HttpPost]
         public IActionResult UpdateTask(Tasks newTasks)
         {
+            newTasks.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
             if (ModelState.IsValid)
             {
                 Tasks oldTasks = _context.Tasks.Find(newTasks.Id);
@@ -83,7 +75,7 @@ namespace TaskListCapstone.Controllers
 
 
                 _context.Entry(oldTasks).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                _context.Update(oldTasks);
+                _context.Tasks.Update(oldTasks);
                 _context.SaveChanges();
 
             }
@@ -106,5 +98,17 @@ namespace TaskListCapstone.Controllers
         // Probably send the task "Id" over
         // Set Complete
         // Set Completetion Status
+        
+        public IActionResult CompleteTask(int id)
+        {
+            Tasks oldTasks = _context.Tasks.Find(id);
+
+            oldTasks.Complete = true;
+            _context.Entry(oldTasks).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.Tasks.Update(oldTasks);
+            _context.SaveChanges();
+
+           return RedirectToAction("Index");
+        }
     }
 }

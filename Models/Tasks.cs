@@ -13,5 +13,28 @@ namespace TaskListCapstone.Models
         public string UserId { get; set; }
 
         public virtual AspNetUsers User { get; set; }
+
+        public Tasks() {}
+
+        public Tasks(int id, string taskName, string description, DateTime dueDate, bool complete, string userID)
+        {
+            Id = id;
+            TaskName = taskName;
+            Description = description;
+            DueDate = dueDate;
+            Complete = complete;
+            UserId = userID;
+        }
+
+        public Tasks(string taskName, string description, DateTime dueDate, bool complete, string userID)
+        {
+            
+            TaskName = taskName;
+            Description = description;
+            DueDate = dueDate;
+            Complete = complete;
+            UserId = userID;
+        }
+
     }
 }
